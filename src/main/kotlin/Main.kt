@@ -1,5 +1,8 @@
-fun main(){
-    var x = "Hello World!"
-    x = "Bye bye World!"
-    println(x)
+fun main() {
+    var x = 11
+    x += 5
+    x++
+    x--
+    val y = 9
+    println(x + y)
 }
