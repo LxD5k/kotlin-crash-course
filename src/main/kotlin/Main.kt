@@ -1,8 +1,4 @@
 fun main() {
-    var x = 11
-    x += 5
-    x++
-    x--
-    val y = 9
-    println(x + y)
+    val x = 12
+    println("Is x an enven number? ${x % 2 == 0}")
 }
