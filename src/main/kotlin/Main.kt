@@ -1,6 +1,8 @@
 fun main() {
-    val x = 12
-    val y = 11
-    val areBothEven = x % 2 == 0 || (y % 2 == 0 && x + y == 25)
-    println("Is x an enven number? $areBothEven")
+    print("Please enter a number: ")
+    val input = readln()
+    val inputAsInteger = input.toInt()
+
+    val isEven = inputAsInteger % 2 == 0
+    println("Is the number even? $isEven")
 }
