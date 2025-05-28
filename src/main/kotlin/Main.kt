@@ -1,20 +1,25 @@
 fun main() {
     println("Enter a string: ")
-    val input = readln().toInt()
+    val input = readln()
 
-    println(input + input.reversed())
-}
-
-fun String.reversed(): String {
-    val finalString = buildString {
-        for (i in this@reversed.lastIndex downTo 0) {
-            append(this@reversed[i])
-        }
+    val favoriteNumbers = intArrayOf(1, 2, 3, 69)
+    val eventNumbers = favoriteNumbers.map {
+        it * it
     }
 
-    return finalString
+    val lettersOnly = input.myFilter {
+       isLetter()
+    }
+
+    println(eventNumbers)
 }
 
-fun Int.reversed(): Int {
-    return this.toString().reversed().toInt()
+fun String.myFilter(predicate: Char.() -> Boolean): String {
+    return buildString {
+        for (char in this@myFilter) {
+            if (predicate(char)) {
+                append(char)
+            }
+        }
+    }
 }
