@@ -1,82 +1,37 @@
-import kotlin.math.PI
-import kotlin.math.pow
-import kotlin.math.sqrt
-
 fun main() {
-    val rect1 = Rectangle(
-        width = 5f,
-        height = 7f,
+    val stringList = listOf(
+        "Hello world!",
+        "Bye bye!",
+        "How's it going?"
     )
-    val circle = Circle(
-        radius = 5f,
-    )
+    val integers = listOf(1, 2, 3, 4, 69)
 
-    for (countrys in Country.entries) {
-        println(countrys.code)
+    val filteredString = stringList.myFilter { currentString ->
+        currentString.length > 10
     }
+    val filteredNumbers = integers.map { it.toDouble() }
 
-    println(FixSizeSquare.area)
+    println(filteredString)
+    println(filteredNumbers)
+
+    val result = makeNetworkCall()
 }
 
-data object FixSizeSquare : Shape {
-    override val area: Float = 16f
-    override val circumference: Float = 16f
-
+fun makeNetworkCall(): Result<Int, String> {
+    return Result.Failure("Something went wrong")
 }
 
-enum class Country(val code: String) {
-    GERMANY("DE"),
-    FRANCE("FR"),
-    USA("US"),
-}
-
-fun greetMe(country: Country): String {
-    return when (country) {
-        Country.GERMANY -> "Guten Tag!"
-        Country.FRANCE -> "Bonjour!"
-        Country.USA -> "Hello!"
-    }
-}
-
-fun printShapes(vararg shapes: Shape) {
-    for (shape in shapes) {
-        val output = when (shape) {
-            is Circle -> "Yo that's a circle"
-            is Rectangle -> "That's a rect"
-            is FixSizeSquare -> "That's a fix size square"
+fun <T> List<T>.myFilter(predicate: (T) -> Boolean): List<T> {
+    val result = mutableListOf<T>()
+    for (element in this) {
+        if (predicate(element)) {
+            result.add(element)
         }
-        println(output)
     }
+    return result.toList()
 }
 
-fun sumAreas(vararg shapes: Shape): Double {
-    return shapes.sumOf { currentShape ->
-        currentShape.area.toDouble()
-    }
-}
-
-sealed interface Shape {
-    val area: Float
-    val circumference: Float
-}
-
-data class Rectangle(
-    val width: Float,
-    val height: Float,
-) : Shape {
-    private val diagonal = sqrt(width.pow(2) + height.pow(2))
-
-    override val area = width * height
-
-    override val circumference: Float = width.plus(height).pow(2)
-}
-
-data class Circle(
-    val radius: Float
-) : Shape {
-    override val area = radius.pow(2) * PI.toFloat()
-
-    val diameter = radius.pow(2)
-
-    override val circumference: Float = radius * PI.toFloat() * 2
+sealed interface Result<out D, out E> {
+    data class Sucess<D>(val data: D) : Result<D, Nothing>
+    data class Failure<E>(val error: E) : Result<Nothing, E>
 }
