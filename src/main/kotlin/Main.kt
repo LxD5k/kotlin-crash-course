@@ -11,11 +11,17 @@ fun main() {
         radius = 5f,
     )
 
-    for (countrys in Country.entries){
+    for (countrys in Country.entries) {
         println(countrys.code)
     }
 
-    println(greetMe(Country.GERMANY))
+    println(FixSizeSquare.area)
+}
+
+data object FixSizeSquare : Shape {
+    override val area: Float = 16f
+    override val circumference: Float = 16f
+
 }
 
 enum class Country(val code: String) {
@@ -37,6 +43,7 @@ fun printShapes(vararg shapes: Shape) {
         val output = when (shape) {
             is Circle -> "Yo that's a circle"
             is Rectangle -> "That's a rect"
+            is FixSizeSquare -> "That's a fix size square"
         }
         println(output)
     }
