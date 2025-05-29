@@ -1,25 +1,33 @@
+import kotlin.math.PI
+import kotlin.math.pow
+import kotlin.math.sqrt
+
 fun main() {
-    println("Enter a string: ")
-    val input = readln()
+    val rect1 = Rectangle(
+        width = 5f,
+        height = 7f,
+    )
+    val circle = Circle(
+        radius = 5f,
+    )
 
-    val favoriteNumbers = intArrayOf(1, 2, 3, 69)
-    val eventNumbers = favoriteNumbers.map {
-        it * it
-    }
-
-    val lettersOnly = input.myFilter {
-       isLetter()
-    }
-
-    println(eventNumbers)
+    println(circle.area)
+    println("The area is ${rect1.area}. The diagonal is ${rect1.diagonal}")
 }
 
-fun String.myFilter(predicate: Char.() -> Boolean): String {
-    return buildString {
-        for (char in this@myFilter) {
-            if (predicate(char)) {
-                append(char)
-            }
-        }
-    }
+data class Rectangle(
+    val width: Float,
+    val height: Float,
+) {
+    val diagonal = sqrt(width.pow(2) + height.pow(2))
+
+    val area = width * height
+}
+
+data class Circle(
+    val radius: Float
+) {
+    val area = radius.pow(2) * PI
+
+    val diameter = radius.pow(2)
 }
