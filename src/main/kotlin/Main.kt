@@ -64,7 +64,7 @@ data class Rectangle(
     val width: Float,
     val height: Float,
 ) : Shape {
-    val diagonal = sqrt(width.pow(2) + height.pow(2))
+    private val diagonal = sqrt(width.pow(2) + height.pow(2))
 
     override val area = width * height
 
