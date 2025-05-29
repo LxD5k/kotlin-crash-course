@@ -11,7 +11,25 @@ fun main() {
         radius = 5f,
     )
 
-    printShapes(rect1, circle)
+    for (countrys in Country.entries){
+        println(countrys.code)
+    }
+
+    println(greetMe(Country.GERMANY))
+}
+
+enum class Country(val code: String) {
+    GERMANY("DE"),
+    FRANCE("FR"),
+    USA("US"),
+}
+
+fun greetMe(country: Country): String {
+    return when (country) {
+        Country.GERMANY -> "Guten Tag!"
+        Country.FRANCE -> "Bonjour!"
+        Country.USA -> "Hello!"
+    }
 }
 
 fun printShapes(vararg shapes: Shape) {
@@ -19,7 +37,6 @@ fun printShapes(vararg shapes: Shape) {
         val output = when (shape) {
             is Circle -> "Yo that's a circle"
             is Rectangle -> "That's a rect"
-            else -> null
         }
         println(output)
     }
@@ -44,7 +61,7 @@ data class Rectangle(
 
     override val area = width * height
 
-    override val circumference: Float = width.pow(2) + height.pow(2)
+    override val circumference: Float = width.plus(height).pow(2)
 }
 
 data class Circle(
@@ -54,5 +71,5 @@ data class Circle(
 
     val diameter = radius.pow(2)
 
-    override val circumference: Float = radius.pow(2) * PI.toFloat()
+    override val circumference: Float = radius * PI.toFloat() * 2
 }
