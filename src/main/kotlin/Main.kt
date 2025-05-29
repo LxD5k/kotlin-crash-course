@@ -11,7 +11,18 @@ fun main() {
         radius = 5f,
     )
 
-    println(sumAreas(rect1, circle))
+    printShapes(rect1, circle)
+}
+
+fun printShapes(vararg shapes: Shape) {
+    for (shape in shapes) {
+        val output = when (shape) {
+            is Circle -> "Yo that's a circle"
+            is Rectangle -> "That's a rect"
+            else -> null
+        }
+        println(output)
+    }
 }
 
 fun sumAreas(vararg shapes: Shape): Double {
@@ -20,7 +31,7 @@ fun sumAreas(vararg shapes: Shape): Double {
     }
 }
 
-interface Shape {
+sealed interface Shape {
     val area: Float
     val circumference: Float
 }
